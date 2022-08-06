@@ -31,11 +31,9 @@ function App() {
   const onSubmitHandler: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     console.log(title);
-    
     const result = createTodo(title)
     setTodos([...todos, result]);
     setTitle('');
-
   }
 
   console.log(todos);
@@ -70,7 +68,27 @@ function App() {
                 <th>{todo.id}</th>
                 <th>{todo.title}</th>
                 <th>
-                  <input type="checkbox" />
+                  <input 
+                    type="checkbox" 
+                    checked={todo.completed}
+                    onChange={(event) => {
+                      console.log(event.target.checked);
+                      
+                      const newCompleted = todos.map((_todo) => {
+                        if (_todo.id === todo.id) {
+                          return {
+                            ..._todo,
+                            completed: !todo.completed,
+                          }
+                        }
+
+                        return _todo;
+                      })
+
+                      setTodos(newCompleted);
+                    }}
+                  />
+
                 </th>
               </tr>
             )
