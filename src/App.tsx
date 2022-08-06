@@ -35,7 +35,11 @@ function App() {
     const result = createTodo(title)
     setTodos([...todos, result]);
     setTitle('');
+
   }
+
+  console.log(todos);
+  
 
   return (
     <div>
@@ -50,16 +54,28 @@ function App() {
         <input type="submit" value="作成"   />
       </form>
       <hr />
+      
       <table border={1}>
         <thead>
           <tr>
             <th>id</th>
             <th>タイトル</th>
-            <th>進捗
-              <input type="checkbox" />
-            </th>
+            <th>進捗</th>
           </tr>
         </thead>
+        <tbody>
+          {todos.map((todo) => {
+            return (
+              <tr key={todo.id}>
+                <th>{todo.id}</th>
+                <th>{todo.title}</th>
+                <th>
+                  <input type="checkbox" />
+                </th>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
     </div>
   )
